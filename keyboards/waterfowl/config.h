@@ -19,3 +19,6 @@
 #define OLED_DISPLAY_128X64
 
 #define SPLIT_USB_DETECT
+
+// Tapping term
+// #define TAPPING_TERM 200

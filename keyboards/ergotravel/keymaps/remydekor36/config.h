@@ -29,6 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MASTER_RIGHT
 // #define EE_HANDS
 
+#define COMBO_COUNT 7
+
 // Lets you roll mod-tap keys
 #define IGNORE_MOD_TAP_INTERRUPT
 // #define PERMISSIVE_HOLD_PER_KEY // counter-productive for my typing style
