@@ -1,6 +1,5 @@
 #include QMK_KEYBOARD_H
 
- 
 #define _COLEMAK 0 // default base layer
 #define _LWR 1 // Lower
 #define _RSE 2 // Raise
@@ -72,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LWR] = LAYOUT( \
   KC_ESC,  KC_PCMM, KC_P7,   KC_P8,   KC_P9,   KC_PAST, XXXXX,   XXXXX,   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______, \
-  KC_NLCK, KC_PDOT, KC_P4,   KC_P5,   KC_P6,   KC_PSLS, XXXXX,   XXXXX,   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, \
+  KC_NUM,  KC_PDOT, KC_P4,   KC_P5,   KC_P6,   KC_PSLS, XXXXX,   XXXXX,   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, \
   KC_PENT, KC_P0,   KC_P1,   KC_P2,   KC_P3,   KC_PPLS, KC_EQL,  _______, KC_EXLM, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______, \
   _______, _______,  _______, _______, _______,         _______, _______, _______,          _______, _______, _______, _______ \
 ),
@@ -91,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJ] = LAYOUT( \
   XXXXXXX, KC_VOLU, KC_F7, KC_F8,   KC_F9,   KC_F10,  XXXXX,   XXXXX,   KC_WH_U, KC_WH_L, KC_MS_U, KC_WH_R, KC_BRIU, XXXXXXX, \
   _______, KC_VOLD, KC_F4, KC_F5,   KC_F6,   KC_F11,  XXXXX,   XXXXX,   KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_BRID, _______, \
-  XXXXXXX, KC_MUTE, KC_F1, KC_F2,   KC_F3,   KC_F12,  EEP_RST, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MFFD, XXXXXXX, XXXXXXX, \
+  XXXXXXX, KC_MUTE, KC_F1, KC_F2,   KC_F3,   KC_F12,  EE_CLR,  XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MFFD, XXXXXXX, XXXXXXX, \
   XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,       _______, _______, KC_BTN1,          KC_BTN2, KC_BTN3, XXXXXXX, XXXXXXX\
 ),
 
