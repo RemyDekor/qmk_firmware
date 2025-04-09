@@ -6,7 +6,7 @@
 #define _ADJ 3 // Adjust
 #define _QWERTY 4 // can be base layer (not stored in EEPROM) => usefull for photoshop etc.
 #define _GAME 5 // can toggle ON / OFF
- 
+
 
 enum custom_keycodes {
   LT_LWR = SAFE_RANGE,
@@ -25,85 +25,109 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  //   [_QWERTY] = LAYOUT(
-  // //,--------+--------+--------+--------+--------+--------+--------.        ,--------+--------+--------+--------+--------+--------+--------.
-  //    KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_MINS,          KC_EQL, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-  // //|--------+--------+--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------+--------+--------|
-  //    KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LBRC,          KC_RBRC, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-  // //|--------+--------+--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------+--------+--------|
-  //    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_SPC,           KC_SPC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-  // //|--------+--------+--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------+--------+--------|
-  //    KC_LCTL, KC_LGUI, KC_LALT, ADJUST,           LOWER,   KC_SPC,           KC_SPC,  RAISE,            KC_LEFT, KC_UP,   KC_DOWN, KC_RGHT
-  // //`--------+--------+--------+--------+--------+--------+--------/        \--------+--------+--------+--------+--------+--------+--------'
-  // ),
-
-/* COLEMAK // mutually exclusive with _QWERTY
- * ,-----------------------------------------.                              ,-----------------------------------------.
- * | Tab  |   Q  |   W  |   F  |   P  |   G  |                              |   J  |   L  |   U  |   Y  |   ;  |  =   |
- * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- * |   `  |   A  |   S  |   R  |   T  |   D  |                              |   H  |   N  |   E  |   I  |   O  |  '   |
- * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
- * |LShEsc|   Z  |   X  |   C  |   V  |   B  |-------.              ,-------|   K  |   M  |   ,  |   .  |   /  |RShEnt|
- * |------+------+------+------+------+------|  Del  |              | Enter |------+------+------+------+------+------|
- * | LCTRL|      |      | LGUI | LAlt |  LWR |-------|              |-------|  RSE |   \  |      |      |      | RALT |
- * `-----------------------------------------/       /              \       \-----------------------------------------'
- *                   |      |      |      | /  BS   /                \ Space \ |      |      |      |
- *                   |      |      |      |/       /                  \       \|      |      |      |
- *                   `--------------------'-------'                    `-------'--------------------'
- */
-[_COLEMAK] = LAYOUT( \
-  KC_TAB,   KC_Q,   KC_W,   KC_F,    KC_P,    KC_G,   XXXXX,         XXXXX,  KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_EQL,  \
-  LT_GRV,   KC_A,   KC_S,   KC_R,    KC_T,    KC_D,   XXXXX,         XXXXX,  KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    LT_QTE,  \
-  KC_LSFT,  KC_Z,   KC_X,   KC_C,    KC_V,    KC_B,   KC_DEL,        KC_ENT, KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, SFT_ENT, \
-  CTR_HOM,  KEEB,   KC_LGUI, KC_LALT, LT_LWR,         KC_BSPC,       KC_SPC, LT_RSE,           KC_BSLS, XXXXX,   XXXXX,   ALT_END \
+// COLEMAK // mutually exclusive with _QWERTY
+[_COLEMAK] = LAYOUT(
+//╭───────┬───────┬───────┬───────┬───────┬───────╮________       ________╭───────┬───────┬───────┬───────┬───────┬───────╮
+//│  Tab  │   Q   │   W   │   F   │   P   │   G   │        │     │ XXXXX  │   J   │   L   │   U   │   Y   │   ;   │   =   │
+   KC_TAB,  KC_Q,   KC_W,   KC_F,   KC_P,   KC_G,    XXXXX,        XXXXX,  KC_J,   KC_L,   KC_U,   KC_Y,  KC_SCLN, KC_EQL,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│   `   │   A   │   S   │   R   │   T   │   D   │ScrnShot│     │ XXXXX  │   H   │   N   │   E   │   I   │   O   │   '   │
+   LT_GRV,  KC_A,   KC_S,   KC_R,   KC_T,   KC_D,    XXXXX,        XXXXX,   KC_H,   KC_N,   KC_E,   KC_I,   KC_O,  LT_QTE,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│ LShEsc│   Z   │   X   │   C   │   V   │   B   │/  Del  /     \ Enter \│   K   │   M   │   ,   │   .   │   /   │ RShEnt│
+   KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,  KC_DEL,         KC_ENT,  KC_K,   KC_M, KC_COMM, KC_DOT, KC_SLSH, SFT_ENT,
+//├───────┼───────┼─────┬─┴─────┬─┴─────┬─┴──────/_______/         \_______\──────┴─┬─────┴─┬─────┴─┬─────┼───────┼───────┤
+//│ LCTRL │  KEEB │     │ LGUI  │ LAlt  │  LWR  / BckSp  /         \  Space \  RSE  │   \   │       │     │       │ RALT  │
+   CTR_HOM,  KEEB,      KC_LGUI, KC_LALT, LT_LWR, KC_BSPC,         KC_SPC,   LT_RSE, KC_BSLS, XXXXX,        XXXXX, ALT_END
+//╰───────┴───────╯     ╰───────┴───────┴─────/________/             \________\─────┴───────┴───────╯     ╰───────┴───────╯
 ),
 
-/* QWERTY // mutually exclusive with _COLEMAK
- */
-[_QWERTY] = LAYOUT( \
-  KC_TAB,   KC_Q,   KC_W,   KC_E,    KC_R,    KC_T,   XXXXX,         XXXXX,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_EQL,  \
-  LT_GRV,   KC_A,   KC_S,   KC_D,    KC_F,    KC_G,   XXXXX,         XXXXX,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, LT_QTE,  \
-  KC_LSFT,  KC_Z,   KC_X,   KC_C,    KC_V,    KC_B,   KC_DEL,        KC_ENT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, SFT_ENT, \
-  CTR_HOM,  KEEB,   KC_LGUI, KC_LALT, LT_LWR,         KC_BSPC,       KC_SPC, LT_RSE,           KC_BSLS, XXXXX,   XXXXX,   ALT_END \
+// QWERTY // mutually exclusive with _COLEMAK
+[_QWERTY] = LAYOUT(
+//╭───────┬───────┬───────┬───────┬───────┬───────╮________       ________╭───────┬───────┬───────┬───────┬───────┬───────╮
+//│  Tab  │   Q   │   W   │   E   │   R   │   T   │        │     │ XXXXX  │   Y   │   U   │   I   │   O   │   P   │   =   │
+   KC_TAB,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,    XXXXX,        XXXXX,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,  KC_EQL,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│   `   │   A   │   S   │   D   │   F   │   G   │ScrnShot│     │ XXXXX  │   H   │   J   │   K   │   L   │   ;   │   '   │
+   LT_GRV,  KC_A,   KC_S,   KC_D,   KC_F,   KC_G,    XXXXX,        XXXXX,   KC_H,   KC_J,   KC_K,   KC_L,  KC_SCLN, LT_QTE,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│ LShEsc│   Z   │   X   │   C   │   V   │   B   │/  Del  /     \ Enter \│   N   │   M   │   ,   │   .   │   /   │ RShEnt│
+   KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,  KC_DEL,         KC_ENT,  KC_N,   KC_M, KC_COMM, KC_DOT, KC_SLSH, SFT_ENT,
+//├───────┼───────┼─────┬─┴─────┬─┴─────┬─┴──────/_______/         \_______\──────┴─┬─────┴─┬─────┴─┬─────┼───────┼───────┤
+//│ LCTRL │  KEEB │     │ LGUI  │ LAlt  │  LWR  / BckSp  /         \  Space \  RSE  │   \   │       │     │       │ RALT  │
+   CTR_HOM,  KEEB,      KC_LGUI, KC_LALT, LT_LWR, KC_BSPC,         KC_SPC,   LT_RSE, KC_BSLS, XXXXX,        XXXXX, ALT_END
+//╰───────┴───────╯     ╰───────┴───────┴─────/________/             \________\─────┴───────┴───────╯     ╰───────┴───────╯
 ),
 
-/* LOWER
- */
-[_LWR] = LAYOUT( \
-  KC_ESC,  KC_PCMM, KC_P7,   KC_P8,   KC_P9,   KC_PAST, XXXXX,   XXXXX,   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______, \
-  KC_NUM,  KC_PDOT, KC_P4,   KC_P5,   KC_P6,   KC_PSLS, XXXXX,   XXXXX,   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, \
-  KC_PENT, KC_P0,   KC_P1,   KC_P2,   KC_P3,   KC_PPLS, KC_EQL,  _______, KC_EXLM, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______, \
-  _______, _______,  _______, _______, _______,         _______, _______, _______,          _______, _______, _______, _______ \
+// LOWER
+[_LWR] = LAYOUT(
+//╭───────┬───────┬───────┬───────┬───────┬───────╮________       ________╭───────┬───────┬───────┬───────┬───────┬───────╮
+//│  Esc  │   ,   │   7   │   8   │   9   │   *   │        │     │ XXXXX  │       │   @   │   #   │   $   │   %   │       │
+   KC_ESC, KC_PCMM, KC_P7,  KC_P8,  KC_P9, KC_PAST,  XXXXX,        XXXXX,   XXXXX,  KC_AT, KC_HASH, KC_DLR,KC_PERC, _____,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│ NumPad│   .   │   4   │   5   │   6   │   /   │ScrnShot│     │ XXXXX  │   ^   │   &   │   *   │   (   │   )   │       │
+   KC_NUM, KC_PDOT, KC_P4,  KC_P5,  KC_P6, KC_PSLS,  XXXXX,        XXXXX,  KC_CIRC,KC_AMPR,KC_ASTR,KC_LPRN,KC_RPRN, _____,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│ KEnter│   0   │   1   │   2   │   3   │   +   │/   =   /     \ Enter \│   !   │   [   │   ]   │   {   │   }   │ RShEnt│
+   KC_PENT, KC_P0,  KC_P1,  KC_P2,  KC_P3, KC_PPLS, KC_EQL,         _____, KC_EXLM,KC_LBRC,KC_RBRC,KC_LCBR,KC_RCBR, _____,
+//├───────┼───────┼─────┬─┴─────┬─┴─────┬─┴──────/_______/         \_______\──────┴─┬─────┴─┬─────┴─┬─────┼───────┼───────┤
+//│       │       │     │       │       │🁢🁢🁢🁢🁢🁢🁢🁢/        /         \        \       │       │       │     │       │       │
+    _____,  _____,        _____,  _____, _____,  _____,               _____,   _____, _____,  _____,        _____,  _____
+//╰───────┴───────╯     ╰───────┴───────┴─────/________/             \________\─────┴───────┴───────╯     ╰───────┴───────╯
 ),
 
-/* RAISE
- */
-[_RSE] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,  XXXXX,   XXXXX,    KC_PGUP, KC_HOME, KC_UP,   KC_END,  _______, _______, \
-  _______, _______, _______, _______, _______, _______,  XXXXX,   XXXXX,    KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, \
-  _______, _______, _______, _______, _______, _______,  _______, _______,  _______, KC_MRWD, KC_MPLY, KC_MFFD, _______, _______, \
-  _______, _______,  _______, _______, _______,          _______, _______,  _______,          _______, _______, _______, _______ \
+// RAISE
+[_RSE] = LAYOUT(
+//╭───────┬───────┬───────┬───────┬───────┬───────╮________       ________╭───────┬───────┬───────┬───────┬───────┬───────╮
+//│       │       │       │       │       │       │        │     │        │   ⇞   │   ⇤   │   ⬆️   │   ⇥   │       │       │
+    _____,  _____,  _____,  _____,  _____,  _____,   XXXXX,        XXXXX,  KC_PGUP,KC_HOME, KC_UP,  KC_END, _____,  _____,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│       │       │       │       │       │       │        │     │        │   ⇟   │   ⬅️   │   ⬇️   │   ➡️   │       │       │
+    _____,  _____,  _____,  _____,  _____,  _____,   XXXXX,        XXXXX,  KC_PGDN,KC_LEFT,KC_DOWN,KC_RGHT, _____,  _____,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│       │       │       │       │       │       │/       /     \       \│       │   ⏮  │   ⏯  │   ⏭  │       │       │
+    _____,  _____,  _____,  _____,  _____,  _____,  _____,          _____,  _____, KC_MRWD,KC_MPLY,KC_MFFD, _____,  _____,
+//├───────┼───────┼─────┬─┴─────┬─┴─────┬─┴──────/_______/         \_______\──────┴─┬─────┴─┬─────┴─┬─────┼───────┼───────┤
+//│       │       │     │       │       │       /        /         \        \🁢🁢🁢🁢🁢🁢🁢🁢│       │       │     │       │       │
+    _____,  _____,        _____,  _____, _____,  _____,               _____,   _____, _____,  _____,        _____,  _____
+//╰───────┴───────╯     ╰───────┴───────┴─────/________/             \________\─────┴───────┴───────╯     ╰───────┴───────╯
 ),
 
-/* ADJUST
- */
-[_ADJ] = LAYOUT( \
-  XXXXXXX, KC_VOLU, KC_F7, KC_F8,   KC_F9,   KC_F10,  XXXXX,   XXXXX,   KC_WH_U, KC_WH_L, KC_MS_U, KC_WH_R, KC_BRIU, XXXXXXX, \
-  _______, KC_VOLD, KC_F4, KC_F5,   KC_F6,   KC_F11,  XXXXX,   XXXXX,   KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_BRID, _______, \
-  XXXXXXX, KC_MUTE, KC_F1, KC_F2,   KC_F3,   KC_F12,  EE_CLR,  XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MFFD, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,       _______, _______, KC_BTN1,          KC_BTN2, KC_BTN3, XXXXXXX, XXXXXXX\
+// ADJUST
+[_ADJ] = LAYOUT(
+//╭───────┬───────┬───────┬───────┬───────┬───────╮________       ________╭───────┬───────┬───────┬───────┬───────┬───────╮
+//│  Esc  │ vol + │   F7  │   F8  │   F9  │  F10  │        │     │        │Scroll⬆️│Scroll⬅️│  Mse⬆️ │Scroll➡️│Bright+│       │
+    XXXXX, KC_VOLU, KC_F7,  KC_F8,  KC_F9,  KC_F10,  XXXXX,        XXXXX,  KC_WH_U,KC_WH_L,KC_MS_U,KC_WH_R,KC_BRIU, XXXXX,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│🁢🁢🁢🁢🁢🁢🁢🁢│ vol - │   F4  │   F5  │   F6  │  F11  │        │     │        │Scroll⬇️│  Mse⬅️ │  Mse⬇️ │  Mse➡️ │Bright-│🁢🁢🁢🁢🁢🁢🁢🁢│
+    _____, KC_VOLD, KC_F4,  KC_F5,  KC_F6,  KC_F11,  XXXXX,        XXXXX,  KC_WH_D,KC_MS_L,KC_MS_D,KC_MS_R,KC_BRID, _____,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│       │  Mute │   F1  │   F2  │   F3  │  F12  │/       /     \       \│       │   ⏮  │   ⏯  │   ⏭  │       │       │
+    XXXXX, KC_MUTE, KC_F1,  KC_F2,  KC_F3,  KC_F12, EE_CLR,        XXXXX,   XXXXX, KC_MPRV,KC_MPLY,KC_MFFD, XXXXX,  XXXXX,
+//├───────┼───────┼─────┬─┴─────┬─┴─────┬─┴──────/_______/         \_______\──────┴─┬─────┴─┬─────┴─┬─────┼───────┼───────┤
+//│       │       │     │       │       │       /        /         \        \MseBtn1│MseBtn2│MseBtn3│     │       │       │
+    XXXXX,  XXXXX,        XXXXX,  XXXXX, XXXXX,  _____,               _____, KC_BTN1,KC_BTN2,KC_BTN3,       XXXXX,  XXXXX
+//╰───────┴───────╯     ╰───────┴───────┴─────/________/             \________\─────┴───────┴───────╯     ╰───────┴───────╯
 ),
 
-/* GAME
- */
-[_GAME] = LAYOUT( \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXX,   XXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXX,   XXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,         _______, _______, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX\
+// GAME
+[_GAME] = LAYOUT( // TODO
+//╭───────┬───────┬───────┬───────┬───────┬───────╮________       ________╭───────┬───────┬───────┬───────┬───────┬───────╮
+//│       │       │       │       │       │       │        │     │        │       │       │       │       │       │       │
+    XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,   XXXXX,        XXXXX,   XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│       │       │       │       │       │       │        │     │        │       │       │       │       │       │       │
+    XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,   XXXXX,        XXXXX,   XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,
+//├───────┼───────┼───────┼───────┼───────┼───────┤________⎦     ⎣________├───────┼───────┼───────┼───────┼───────┼───────┤
+//│       │       │       │       │       │       │/       /     \       \│       │       │       │       │       │       │
+    XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,   XXXXX,        XXXXX,   XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,  XXXXX,
+//├───────┼───────┼─────┬─┴─────┬─┴─────┬─┴──────/_______/         \_______\──────┴─┬─────┴─┬─────┴─┬─────┼───────┼───────┤
+//│       │       │     │       │       │       /        /         \        \       │       │       │     │       │       │
+    XXXXX,  XXXXX,        XXXXX,  XXXXX, XXXXX,  _____,               _____,  XXXXX,  XXXXX,  XXXXX,        XXXXX,  XXXXX
+//╰───────┴───────╯     ╰───────┴───────┴─────/________/             \________\─────┴───────┴───────╯     ╰───────┴───────╯
 ),
 };
- 
+
 bool isQwertyActive = false;
 static uint16_t key_timer;
 bool no_other_key_pressed = true;
@@ -169,8 +193,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
 
     case LT_QTE:
-      // LT(3, KC_QUOT); 
-      LayerTap(3, KC_QUOT, TAPPING_TERM, true, record); 
+      // LT(3, KC_QUOT);
+      LayerTap(3, KC_QUOT, TAPPING_TERM, true, record);
       return false;
 
     case KEEB:

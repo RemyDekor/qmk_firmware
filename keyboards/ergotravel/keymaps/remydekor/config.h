@@ -29,15 +29,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MASTER_RIGHT
 // #define EE_HANDS
 
-#define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 145
-// #define TAPPING_TERM_PER_KEY
-#define PERMISSIVE_HOLD
+// Lets you roll mod-tap keys
+#define IGNORE_MOD_TAP_INTERRUPT
+#define PERMISSIVE_HOLD_PER_KEY
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+#define TAPPING_FORCE_HOLD_PER_KEY
 
-#define MOUSEKEY_DELAY 90
-#define MOUSEKEY_INTERVAL 16
-#define MOUSEKEY_MOVE_DELTA 6
+#define TAPPING_TERM 145
+
+#define MOUSEKEY_DELAY 55
+#define MOUSEKEY_INTERVAL 13
+#define MOUSEKEY_MOVE_DELTA 5
 #define MOUSEKEY_MAX_SPEED 2
+#define MOUSEKEY_TIME_TO_MAX 28
 
 // #undef RGBLED_NUM
 // #define RGBLIGHT_ANIMATIONS
